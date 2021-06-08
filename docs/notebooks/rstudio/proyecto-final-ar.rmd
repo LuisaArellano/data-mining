@@ -1,7 +1,7 @@
 ---
 title: "Proyecto Final (Association Rules)"
-author: "Profesor Marciano A. Moreno D.C."
-date: "27 de mayo de 2021"
+author: "Luisa Fernanda Arellano Alvarado"
+date: "07 de Junio del 2021"
 output:
   pdf_document:
     latex_engine: xelatex
@@ -72,6 +72,7 @@ Las actividades de codificación estarán identificadas con la clave **CODE-nn**
 Implementa la operación de adición de los enteros 2 y 3
 ```{r}
 #TODO: Implementa la operación de adición con los enteros: 2 y 3
+2+3
 
 ```
 
@@ -80,7 +81,7 @@ Implementa la operación de adición de los enteros 2 y 3
 
 Escribe la fecha actual (**NOTE-01**): <FECHA>
 
-## Personalización del notebook
+## 07/06/2021
 
 **CODE-02** Datos generales
 Asigna tus datos a las siguientes variables:
@@ -146,12 +147,20 @@ Considera a `smallbasket` como la siguiente lista de transacciones, implementa e
 
 Responde a las siguientes preguntas de smallbasket:
 
-- Cantidad de transacciones (n) (**NOTE-02**): 
-- Frecuencia absoluta del item {beer} (**NOTE-03**): 
-- Frecuencia absoluta del item {nuts} (**NOTE-04**): 
-- Frecuencia absoluta del itemset {beer, nuts} (**NOTE-05**): 
-- Support del item {beer} (**NOTE-06**): 
-- Support del itemset {beer, nuts} (**NOTE-07**): 
+## NOTE-02: 5 transacciones
+## NOTE-03: frecuencia absoluta del item beer --> 3
+## NOTE-04: frecuencia absoluta del item nuts --> 3
+## NOTE-05: frecuencia absoluta del itemset  {beer, nuts}  --> 1
+## NOTE-06: Support del item beer --> 3/5
+## NOTE-07: Support del itemset  {beer, nuts} --> 1/5
+
+```{r }
+#Para sacar la frecuencia absoluta de beer
+s <- list(c("beer", "nuts", "diapers" , "beer", "coffee", "diapers" , "beer", "diapers", "eggs","nuts", "eggs", "milk" ,"nuts", "coffee", "diapers", "eggs", "milk")) 
+table(s)
+
+
+```
 
 
 Implementaremos a `smallbasket` en R por medio de `list`.
@@ -178,7 +187,7 @@ Crea un objeto `smalltx` de tipo `arules::transactions` a partir de la lista `sm
 **CODE-05** Crea una variable `smalltx` que sea un objeto `transactions` a partir de los datos en `smallbasket`.
 ```{r}
 #TODO: Modifica el código de abajo para transformar smallbaskets a un objeto de tipo transactions
-smalltx <- as(smallbasket, "list")
+smalltx <- as(smallbasket, "transactions")
 ```
 
 Verifica que smalltx sea de tipo transactions.
@@ -190,10 +199,10 @@ Implementa en el chunk de abajo el código para visualizar la información gener
 summary(smalltx)
 ```
 
-- Número de renglones (**NOTE-08**): 
-- Número de columnas (**NOTE-09**): 
-- Densidad de la matriz (**NOTE-10**): 
-- Media aritmética del número de elementos (itemsets) por transacción (**NOTE-11**):
+## NOTE-08: Número de renglones = 5
+## NOTE-09: Número de columnas = 6
+## NOTE-10:Densidad de la matriz= 0.5666667 
+## NOTE-11:Media aritmética del número de elementos (itemsets) por transacción = 3.0 
 
 Visualiza la matriz de items y transacciones.
 ```{r}
@@ -220,10 +229,12 @@ smallrules <- apriori(smalltx)
 
 Menciona los valores por omisión de algoritmo apriori de la librería arules:
 
-- support (mínimo) (**NOTE-12**): 
-- confidence (mínimo) (**NOTE-13**):
-- items (máximo) (**NOTE-14**):
-- tiempo de verificación de subsets (máximo) (**NOTE-15**):
+## NOTE-12:support (mínimo) -> Por defecto es 0.1
+## NOTE-13:confidence (mínimo) ->  Por defecto 0.8
+## NOTE-14:items (máximo) -> Por defecto 10
+## NOTE-15: tiempo de verificación de subsets (máximo) -> Por defecto 5 segundos.
+## Referencia 
+## https://www.cienciadedatos.net/documentos/43_reglas_de_asociacion
 
 
 Invoca `summary()` con `smallrules`, consulta los resultados en **R Console** y responde a las preguntas de abajo. 
@@ -234,9 +245,9 @@ Tip: Para mayor legibilidad emplea el comando **Show in new window**
 summary(smallrules)
 ```
 
-- Cantidad de reglas producidas (**NOTE-16**):
-- Media aritmética de support (**NOTE-17**):
-- Media aritmética de confidence (**NOTE-18**): 
+## NOTE-16:Cantidad de reglas producidas -> 46
+## NOTE-17:Media aritmética de support -> 0.2000
+## NOTE-18: Media aritmética de confidence -> 1.0000
 
 Inspecciona `smallrules` y responde a las preguntas a continuación.
 ```{r}
@@ -244,10 +255,13 @@ inspect(smallrules)
 ```
 
 
-- ¿Cuál es la interpretación de la regla `{} => {diapers}` en la que se aprecia la ausencia del LHS? (**NOTE-19**):
-- Calcula el valor de la métrica support para la regla `{beer} => {nuts}` (**NOTE-20**): 
-- Calcula el valor de la métrica confidence para la regla `{beer} => {nuts}` (**NOTE-21**): 
-- ¿Por qué no aparece listada la regla `{beer} => {nuts}`? (**NOTE-22**): 
+## NOTE-19:¿Cuál es la interpretación de la regla {} => {diapers} en la que se aprecia la ausencia del LHS?  --- > tiene eñ soporte y la confianza alto , la probalidad de que compren ese producto es de un 80%
+
+## NOTE-20:Calcula el valor de la métrica support para la regla {beer} => {nuts}  --> 0.2
+
+## NOTE-21: Calcula el valor de la métrica confidence para la regla {beer} => {nuts}  --> soporte{A, B} / soporte {A} => 0.33
+
+## NOTE-22: ¿Por qué no aparece listada la regla {beer} => {nuts}? --> porque el minimo para la confianza es de 0.8 , esta regla no cumple con el minimo.
 
 
 
@@ -291,9 +305,12 @@ length(unique(mssddf$track_id_clean))
 
 Consulta el paper [The Music Streaming Sessions Dataset](https://arxiv.org/abs/1901.09851) y responde a las siguientes preguntas:
 
-- ¿Cuál es el propósito de `session id`? (**NOTE-23**): 
-- ¿Cuál es el propósito de `track id`? (**NOTE-24**):
-- ¿Consideras que las otras columnas del dataset son aplicables para análisis por medio de reglas de asociación, justifica tu respuesta? (**NOTE-25**): 
+## NOTE-23:¿Cuál es el propósito de session id? ->Es un identificador de sesión único
+
+## NOTE-24:¿Cuál es el propósito de track id? -> Es un identificador de pista único
+
+## NOTE-25:¿Consideras que las otras columnas del dataset son aplicables para análisis por medio de reglas de asociación, justifica tu respuesta? -> Sí, estás columnas contienen datos y números como lo hemos visto anteriormente en las canasta de mercado, considero que sería el mismo procedimiento. Quitando los datos booleanos.
+
 
 Inspecciona la estructura de `y`, el dataset preparado.
 ```{r}
@@ -320,9 +337,13 @@ summary(mssdtx)
 ```
 Responde a las siguientes preguntas:
 
-- ¿Cuál es el ID y frecuencia absoluta de la sesión más frecuente? (**NOTE-26**): 
-- ¿Cuántos items tiene el itemset con mayor número de ocurrencias en la lista element length distribution? (**NOTE-27**): 
-- En el contexto de este dataset con información de sesiones de streaming, ¿cuál es la interpretación de la media aritmética? (**NOTE-28**): 
+## NOTE-26: ¿Cuál es el ID y frecuencia absoluta de la sesión más frecuente? -> t_bacf06d3-9185-4183-84ea-ff0db51475ce 
+## frec 878 
+
+## NOTE-27:¿Cuántos items tiene el itemset con mayor número de ocurrencias en la lista element length distribution? -> 5
+
+## NOTE-28:  En el contexto de este dataset con información de sesiones de streaming, ¿cuál es la interpretación de la media aritmética? -> una gran parte ocupa streaming
+
 
 
 Ejecuta el algoritmo apriori con los parámetros por omisión.
@@ -331,8 +352,10 @@ rules <- apriori(mssdtx)
 summary(rules)
 ```
 
-- ¿Qué factores están asociados con que el algoritmo `apriori` con parámetros por omisión no haya producido ninguna regla de asociación, justifica tu respuesta? (**NOTE-29**):
-- ¿Qué riesgos identificas con la asignación de valores muy bajos en los parámetros de  `support` y `confidence` al invocar el algoritmo `apriori`?
+## NOTE-29: 
+##  a) ¿Qué factores están asociados con que el algoritmo apriori con parámetros por omisión no haya producido ninguna regla de asociación, justifica tu respuesta? -> entre más alto sea el nivel de soporte más confiable se vuelve y más frecuentes . Pero si el valor da muy alto no entra dentro de las transacciones de datos
+
+## B) ¿Qué riesgos identificas con la asignación de valores muy bajos en los parámetros de support y confidence al invocar el algoritmo apriori? --> Que en estas ocaciones no se considerada un item frecuente y no tiene  la confianza mínima que debe de tener una regla para ser incluida en los resultados. 
 
 **CODE-07** Invoca `apriori`
 Configura la invocación a `apriori` para producir al menos 220 reglas de asociación para ello puedes considerar el uso de los parámetros `support` y `confidence` como se muestra a continuación
@@ -340,8 +363,8 @@ Configura la invocación a `apriori` para producir al menos 220 reglas de asocia
 
 ```{r}
 #TODO: Configura las variables SUPP y CONF para generar al menos 250 reglas de asociación
-SUPP = 0.1 
-CONF = 0.8
+SUPP = 0.01
+CONF = 0.01
 rules <- apriori(mssdtx, parameter = list(support = SUPP, confidence = CONF))
 summary(rules)
 ```
@@ -360,6 +383,7 @@ Inspecciona las reglas con mayor lift
 inspect(head(sort(rules, by = "lift")))
 ```
 
+## Note 30:https://youtu.be/0CQ6IMV2Nwc
 
 Graba y publica un video (puede ser un video publicado de forma privada en YouTube u otro servicio similar) de 3 a 5 minutos explicando lo siguiente:
 
