@@ -1,7 +1,7 @@
 ---
-title: "Proyecto Final (Association Rules)"
-author: "Luisa Fernanda Arellano Alvarado"
-date: "07 de Junio del 2021"
+title: "Proyecto Final (Association Rules)."
+author: "Luisa Fernanda Arellano Alvarado A01377974."
+date: "07 de Junio del 2021."
 output:
   pdf_document:
     latex_engine: xelatex
