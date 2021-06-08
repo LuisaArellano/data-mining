@@ -3,10 +3,10 @@ title: "Proyecto Final (Association Rules)"
 author: "Profesor Marciano A. Moreno D.C."
 date: "27 de mayo de 2021"
 output:
-  html_document:
-    df_print: paged
   pdf_document:
     latex_engine: xelatex
+  html_document:
+    df_print: paged
 ---
 
 ```{r setup, include=FALSE}
@@ -85,8 +85,8 @@ Escribe la fecha actual (**NOTE-01**): <FECHA>
 **CODE-02** Datos generales
 Asigna tus datos a las siguientes variables:
 ```{r}
-NOMBRE_COMPLETO = "Nombre Apellidos"
-DIGITOS_MATRICULA = 0
+NOMBRE_COMPLETO = "Luisa Arellano"
+DIGITOS_MATRICULA = 01377974
 ```
 
 ## Instalación y carga de paquetes base
